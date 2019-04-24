@@ -21,6 +21,7 @@
   </div>
   </nav>
   <div class="container" ng-controller="myCtrl">
+    <h1>GPA</h1>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -35,7 +36,7 @@
           <td ng-bind="student.id"></td>
           <td ng-bind="student.last_name"></td>
           <td ng-bind="student.first_name"></td>
-          <td ng-bind="student.gpa_points/student.credit_hrs"></td>
+          <td ng-bind="(student.gpa_points/student.credit_hrs).toFixed(1)"></td>
         </tr>
       </tbody>
     </table>
