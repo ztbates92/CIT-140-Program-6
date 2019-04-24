@@ -1,0 +1,67 @@
+<head>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
+  <title>Advisees</title>
+</head>
+
+<body ng-app="myApp">
+  <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Our Website</a>
+        </div>
+        <div>
+            <ul class="nav navbar-nav">
+               <li class="active"><a href="index.html">All Advisees</a></li>
+               <li><a href="gpa.html">Grade Point Averages</a></li>
+            </ul>
+        </div>
+  </div>
+  </nav>
+
+  <div class="container" ng-controller="myCtrl">
+    <h1>Advisees</h1>
+    <p><input type="text" id="search" ng-model="search_text">Enter Search Text</p>
+    <table class="table table-striped" id="table1">
+      <thead>
+        <tr>
+          <th>Student ID</th>
+          <th>Last Name</th>
+          <th>First Name</th>
+          <th>Credit Hours</th>
+          <th>GPA Points</th>
+          <th>Major</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+</body>
+
+<script type="text/javascript">
+  var url = "students.json";
+  var searchText;
+  var app = angular.module('myApp', []);
+  app.controller('myCtrl', function($scope) {
+    searchText = $scope.search_text;
+  });
+
+  $(document).ready(function() {
+    $.get(url, function(data) {
+      for (var i = 0; i < data.length; i++) {
+        var newRow = document.createElement("tr");
+        var rowData = "<td>" + data[i].id + "</td>";
+        rowData += "<td>" + data[i].last_name + "</td>";
+        rowData += "<td>" + data[i].first_name + "</td>";
+        rowData += "<td>" + data[i].credit_hrs + "</td>";
+        rowData += "<td>" + data[i].gpa_points + "</td>";
+        rowData += "<td>" + data[i].major + "</td>";
+        newRow.innerHTML = rowData;
+        document.getElementsByTagName('tbody')[0].appendChild(newRow);
+      }
+    })
+  });
+</script>

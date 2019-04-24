@@ -1,0 +1,60 @@
+<head>
+  <link rel="stylesheet"        href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
+  <title>GPA</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+      <div class="navbar-header">
+          <a class="navbar-brand" href="#">Our Website</a>
+      </div>
+      <div>
+          <ul class="nav navbar-nav">
+             <li><a href="index.html">All Advisees</a></li>
+             <li class="active"><a href="gpa.html">Grade Point Averages</a></li>
+          </ul>
+      </div>
+  </div>
+  </nav>
+  <div class="container">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <td>Student ID</td>
+          <td>Last Name</td>
+          <td>First Name</td>
+          <td>GPA</td>
+        </tr>
+      </thead>
+      <tbody>
+
+      </tbody>
+    </table>
+  </div>
+</body>
+
+<script type="text/javascript">
+  var url = "students.json";
+  $(document).ready(function() {
+    $.get(url, function(data) {
+      fillTable(data);
+    });
+  });
+
+  function fillTable(data) {
+    for (var i = 0; i < data.length; i++) {
+      var newRow = document.createElement("tr");
+      var rowData = "<td>" + data[i].id + "</td>";
+      rowData += "<td>" + data[i].last_name + "</td>";
+      rowData += "<td>" + data[i].first_name + "</td>";
+      var gpa = data[i].gpa_points / data[i].credit_hrs;
+      rowData += "<td>" + gpa.toFixed(1) + "</td>";
+      newRow.innerHTML = rowData;
+      document.getElementsByTagName("tbody")[0].appendChild(newRow);
+    }
+  }
+</script>
