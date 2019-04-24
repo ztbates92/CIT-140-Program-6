@@ -36,6 +36,14 @@
         </tr>
       </thead>
       <tbody>
+        <tr ng-repeat="student in tableData">
+          <td ng-bind="student.id"></td>
+          <td ng-bind="student.last_name"></td>
+          <td ng-bind="student.first_name"></td>
+          <td ng-bind="student.credit_hrs"></td>
+          <td ng-bind="student.gpa_points"></td>
+          <td ng-bind="student.major"></td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -43,25 +51,19 @@
 
 <script type="text/javascript">
   var url = "students.json";
-  var searchText;
   var app = angular.module('myApp', []);
   app.controller('myCtrl', function($scope) {
-    searchText = $scope.search_text;
+    $.get(url, function(data) {
+      $scope.tableData = data;
+    });
   });
 
   $(document).ready(function() {
-    $.get(url, function(data) {
-      for (var i = 0; i < data.length; i++) {
-        var newRow = document.createElement("tr");
-        var rowData = "<td>" + data[i].id + "</td>";
-        rowData += "<td>" + data[i].last_name + "</td>";
-        rowData += "<td>" + data[i].first_name + "</td>";
-        rowData += "<td>" + data[i].credit_hrs + "</td>";
-        rowData += "<td>" + data[i].gpa_points + "</td>";
-        rowData += "<td>" + data[i].major + "</td>";
-        newRow.innerHTML = rowData;
-        document.getElementsByTagName('tbody')[0].appendChild(newRow);
-      }
-    })
+    $('#search_text').on("input", reloadTable);
   });
+
+  function reloadTable() {
+
+  }
+
 </script>
