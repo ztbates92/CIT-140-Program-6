@@ -36,7 +36,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="student in tableData">
+        <tr ng-repeat="student in tableData | filter : search_text">
           <td ng-bind="student.id"></td>
           <td ng-bind="student.last_name"></td>
           <td ng-bind="student.first_name"></td>
@@ -53,14 +53,10 @@
   var url = "students.json";
   var app = angular.module('myApp', []);
 
-  app.controller('myCtrl', function($scope) {
-    var array = [];
-    $.getJSON(url, function(data) {
-      for (var i = 0; i < data.length; i++) {
-        array.push(data[i]);
-      }                         //end of for loop
-    });                         //end of $.getJSON
-    $scope.tableData = array;
+  app.controller('myCtrl', function($scope, $http) {
+    $http.get("students.json").then(function (response) {
+      $scope.tableData = response.data;
+    });                       //end of $.getJSON
   });                           //end of app.controller()
 
 </script>
