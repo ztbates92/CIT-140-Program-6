@@ -52,18 +52,15 @@
 <script type="text/javascript">
   var url = "students.json";
   var app = angular.module('myApp', []);
+
   app.controller('myCtrl', function($scope) {
-    $.get(url, function(data) {
-      $scope.tableData = data;
-    });
-  });
-
-  $(document).ready(function() {
-    $('#search_text').on("input", reloadTable);
-  });
-
-  function reloadTable() {
-
-  }
+    var array = [];
+    $.getJSON(url, function(data) {
+      for (var i = 0; i < data.length; i++) {
+        array.push(data[i]);
+      }                         //end of for loop
+    });                         //end of $.getJSON
+    $scope.tableData = array;
+  });                           //end of app.controller()
 
 </script>
