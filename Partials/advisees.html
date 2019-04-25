@@ -1,0 +1,26 @@
+<div class="container" ng-controller="myCtrl">
+  <h1>Advisees</h1>
+  <p><input type="text" id="search" ng-model="search_text">Enter Search Text</p>
+  <table class="table table-striped" id="table1">
+    <thead>
+      <tr>
+        <th>Student ID</th>
+        <th>Last Name</th>
+        <th>First Name</th>
+        <th>Credit Hours</th>
+        <th>GPA Points</th>
+        <th>Major</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="student in tableData | filter : search_text">
+        <td ng-bind="student.id"></td>
+        <td ng-bind="student.last_name"></td>
+        <td ng-bind="student.first_name"></td>
+        <td ng-bind="student.credit_hrs"></td>
+        <td ng-bind="student.gpa_points"></td>
+        <td ng-bind="student.major"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
