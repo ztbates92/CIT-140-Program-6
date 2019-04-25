@@ -3,6 +3,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-route.js"></script>
   <title>Home</title>
 </head>
 
@@ -34,21 +35,21 @@
   app.config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateURL : "partials/home.html"
+        templateUrl : 'home.html'
       })
       .when('/home', {
-        templateURL : "partials/home.html"
+        templateUrl : 'home.html'
       })
       .when('/advisees', {
-        templateURL : "partials/advisees.html",
-        controller : "myCtrl"
+        templateUrl : 'advisees.html',
+        controller : 'myCtrl'
       })
       .when("/gpa", {
-        templateURL : "partials/gpa.html",
-        controller : "gpaCtrl"
+        templateUrl : 'gpa.html',
+        controller : 'gpaCtrl'
       })
       .otherwise({
-        redirectTo : "partials/home.html"
+        redirectTo : 'home.html'
       });
   });
 
